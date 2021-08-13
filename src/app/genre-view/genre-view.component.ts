@@ -10,6 +10,10 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class GenreViewComponent implements OnInit {
 
+  /**
+   * genre data from database
+   * @param genre 
+   */
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public genre: {

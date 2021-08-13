@@ -19,6 +19,13 @@ export class MovieCardComponent implements OnInit {
   movies: any[] = [];
   FavoriteMovies: any = {};
 
+
+  /**
+   * 
+   * @param fetchApiData 
+   * @param dialog 
+   * @param snackBar 
+   */
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialog: MatDialog,
@@ -32,7 +39,10 @@ export class MovieCardComponent implements OnInit {
     this.getFavorites();
   }
 
-  //fetch the movies from API
+
+  /**
+   * getMovies() - function to get all movies (fetch movie objects from API)
+   */
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
@@ -41,21 +51,36 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-  //open movie details
+
+  /**
+   * openMovieViewDialog() - function to open dialog with movie details
+   * @param details 
+   */
   openMovieViewDialog(details: string): void {
     this.dialog.open(MovieViewComponent, {
       data: { details },
     });
   }
 
-  //open movie details
+
+  /**
+   * openGenreViewDialog() - function to open dialog with genre details
+   * @param name 
+   * @param description 
+   */
   openGenreViewDialog(name: string, description: string): void {
     this.dialog.open(GenreViewComponent, {
       data: { name, description },
     });
   }
 
-  //open movie details
+
+  /**
+   * openDirectorViewDialog() - function to open dialog with director info
+   * @param name 
+   * @param bio 
+   * @param image 
+   */
   openDirectorViewDialog(name: string, bio: string, image: string): void {
     this.dialog.open(DirectorViewComponent, {
       data: { name, bio, image },
@@ -63,6 +88,9 @@ export class MovieCardComponent implements OnInit {
   }
 
 
+  /**
+   *  getFavorites() - function to fetch movie ids from user object in database
+   */
   getFavorites(): void {
     const user = localStorage.getItem('user');
     this.fetchApiData.getUser(user).subscribe((resp: any) => {
@@ -70,6 +98,12 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+
+  /**
+   * addToFavorites() - function to add movie to list of favorites
+   * @param movieId 
+   * @returns movieID to push to list of favorites
+   */
   addToFavorites(movieId: string): any {
     // const FavoriteMovies = localStorage.getItem('FavoriteMovies');
     this.fetchApiData.addFavorite(movieId).subscribe((resp: any) => {
@@ -83,32 +117,14 @@ export class MovieCardComponent implements OnInit {
   }
 
 
+  /**
+   * isFavorite() - function to check if id is included in list of favorite movies
+   * @param movieID 
+   * @returns 
+   */
   isFavorite(movieID: string) {
     return this.FavoriteMovies.includes(movieID);
   }
-
-  // addToFavorites(movieId: string): any {
-  //   if (this.isFavorite(movieId)) {
-  //     this.fetchApiData.removeFavorite(movieId).subscribe((resp: any) => {
-  //       this.snackBar.open('Removed from favorites!', 'OK', {
-  //         duration: 2000,
-  //       });
-  //     });
-  //     const index = this.FavoriteMovies.indexOf(movieId);
-  //     return this.FavoriteMovies.splice(index, 1);
-  //   } else {
-  //     console.log('1 - before add', this.FavoriteMovies);
-  //     this.fetchApiData.addFavorite(movieId).subscribe((response: any) => {
-  //       this.snackBar.open('Added to favorites!', 'OK', {
-  //         duration: 2000,
-  //       });
-  //       console.log('2 - after add', this.FavoriteMovies);
-  //     });
-  //   }
-  //   console.log('3 - after all', this.FavoriteMovies);
-  //   return this.FavoriteMovies.push(movieId);
-  // }
-
 
 
 }

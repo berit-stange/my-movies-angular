@@ -8,6 +8,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class NavigationComponent implements OnInit {
 
+  /**
+   * 
+   * @param snackBar 
+   */
   constructor(
     public snackBar: MatSnackBar
   ) { }
@@ -15,6 +19,10 @@ export class NavigationComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  /**
+   * logOut() - function to log out user and show alert
+   */
   logOut(): void {
     localStorage.clear;
     this.snackBar.open('You have logged out!', 'Ok', {

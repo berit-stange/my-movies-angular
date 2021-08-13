@@ -1,7 +1,7 @@
 // src/app/user-registration-form/user-registration-form.component.ts
 import { Component, OnInit, Input } from '@angular/core';
 
-// This import brings in the API calls we created in 6.2
+// This import brings in the API calls created in 6.2
 import { FetchApiDataService } from '../fetch-api-data.service';
 
 // close the dialog on success
@@ -28,6 +28,11 @@ export class UserRegistrationFormComponent implements OnInit {
     Birthday: ''
   };
 
+  /**
+   * @param fetchApiData 
+   * @param dialogRef 
+   * @param snackBar 
+   */
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserRegistrationFormComponent>,
@@ -38,7 +43,9 @@ export class UserRegistrationFormComponent implements OnInit {
   }
 
 
-  // This is the function responsible for sending the form inputs to the backend
+  /**
+   * registerUser() - function responsible for sending the form inputs to the backend
+   */
   registerUser(): void {
     this.fetchApiData.userRegistration(this.userData).subscribe((result) => {
       // Logic for a successful user registration goes here! (To be implemented)

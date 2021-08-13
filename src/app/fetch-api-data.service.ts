@@ -8,12 +8,15 @@ import { map } from 'rxjs/operators';
 //Declaring the api url that will provide data for the client app
 const apiUrl = 'https://movie-app-001.herokuapp.com/';
 
+// Create injectable service to use this class in the DI system
 @Injectable({
   providedIn: 'root'
 })
 export class FetchApiDataService {
   //Inject the HttpClient module to the constructor params
-  //This will provide HttpClient to the entire class, making it available via this.http
+  //This will provide HttpClient to the entire class, 
+  //making it available via this.http
+
   constructor(private http: HttpClient, private router: Router) { }
 
 
@@ -25,8 +28,12 @@ export class FetchApiDataService {
   }
 
 
-
   // Register user
+  /**
+     * User registration
+     * @param userDetails
+     * @returns Request to database (Endpoint: 'users', Method: POST)
+     */
   public userRegistration(userDetails: any): Observable<any> {
     console.log(userDetails);
     return this.http
@@ -54,6 +61,11 @@ export class FetchApiDataService {
 
 
   // Login user
+  /**
+   * User login
+   * @param userDetails
+   * @returns Request to database (Endpoint: 'login', Method: POST)
+   */
   public userLogin(userDetails: any): Observable<any> {
     console.log(userDetails);
     return this.http
@@ -74,7 +86,12 @@ export class FetchApiDataService {
 
 
 
-  // get user info
+  // get user data
+  /**
+   * get user data
+   * @param user
+   * @returns Request to the database (Endpoint: 'users/:Username', Method: GET)
+   */
   getUser(user: any): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http
@@ -100,6 +117,11 @@ export class FetchApiDataService {
 
 
   // update user data
+  /**
+   * update user
+   * @param userDetails
+   * @returns Request to database (Endpoint: 'users/:Username', Method: PUT)
+   */
   updateUser(userDetails: any): Observable<any> {
     const token = localStorage.getItem('token');
     const user = localStorage.getItem('user');
@@ -128,6 +150,11 @@ export class FetchApiDataService {
 
 
   // delete user account
+  /**
+ * delete user data
+ * @param user
+ * @returns Request to the database (Endpoint: 'users/:Username', Method: DELETE)
+ */
   deleteUser(): Observable<any> {
     const token = localStorage.getItem('token');
     const user = localStorage.getItem('user');
@@ -156,6 +183,10 @@ export class FetchApiDataService {
 
 
   // Return all movies in database
+  /**
+   * get all movies
+   * @returns Request to database (Endpoint: 'movies', Method: GET)
+   */
   getAllMovies(): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.get(apiUrl + 'movies', {
@@ -184,6 +215,11 @@ export class FetchApiDataService {
 
 
   // get movie details / get movie by title
+  /**
+   * get one specific movie
+   * @param movie.Title
+   * @returns Request to the database (Endpoint: 'movies/:title', Method: GET)
+   */
   getMovieByTitle(): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.get(apiUrl + 'movies/:Title', {
@@ -210,6 +246,12 @@ export class FetchApiDataService {
 
 
   // Add movies to favorites
+  /**
+   * add movie to list of favorites 
+   * @param user
+   * @param id 
+   * @returns Request to the database (Endpoint: 'users/:username/favorites/:movie_id', Method: POST)
+   */
   addFavorite(id: string): Observable<any> {
     const token = localStorage.getItem('token');
     const user = localStorage.getItem('user');
@@ -238,6 +280,12 @@ export class FetchApiDataService {
 
 
   // Remove movies from favorites
+  /**
+   * remove movie from list of favorites 
+   * @param user
+   * @param id
+   * @returns Request to the database (Endpoint: 'users/:username/favorites/:movie_id', Method: DELETE)
+   */
   removeFavorite(id: string): Observable<any> {
     const token = localStorage.getItem('token');
     const user = localStorage.getItem('user');
@@ -266,6 +314,10 @@ export class FetchApiDataService {
 
 
   // get director
+  /**
+   * det director
+   * @returns Request to database (Endpoint: 'director', Method: GET)
+   */
   getDirector(): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.get(apiUrl + 'movies/directors/:Name', {
@@ -293,6 +345,10 @@ export class FetchApiDataService {
 
 
   // get genre
+  /**
+   * get genre endpoint
+   * @returns Request to database (Endpoint: 'genre', Method: GET)
+   */
   getGenre(): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.get(apiUrl + 'movies/genres/:Name', {

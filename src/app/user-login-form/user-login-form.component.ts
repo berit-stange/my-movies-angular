@@ -26,6 +26,13 @@ export class UserLoginFormComponent implements OnInit {
     Password: ''
   };
 
+  /**
+   * 
+   * @param fetchApiData 
+   * @param dialogRef 
+   * @param snackBar 
+   * @param router 
+   */
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserLoginFormComponent>,
@@ -37,7 +44,9 @@ export class UserLoginFormComponent implements OnInit {
   }
 
 
-  // This is the function responsible for sending the form inputs to the backend
+  /**
+   * loginUser() - function to send form inputs to the backend at login
+   */
   loginUser(): void {
     this.fetchApiData.userLogin(this.userData).subscribe((result) => {
       // Logic for a successful user login goes here! (To be implemented)

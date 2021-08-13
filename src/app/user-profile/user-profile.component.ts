@@ -35,6 +35,12 @@ export class UserProfileComponent implements OnInit {
   FavoriteMovies: any = {};
   favorites: any = [];
 
+  /**
+   * @param fetchApiData 
+   * @param dialog 
+   * @param snackBar 
+   * @param router 
+   */
   constructor(
     public fetchApiData: FetchApiDataService,
     // public dialogRef: MatDialogRef<UserProfileComponent>,
@@ -48,6 +54,9 @@ export class UserProfileComponent implements OnInit {
   }
 
 
+  /**
+   * openUserUpdateDialog() - function ot open update dialog
+   */
   openUserUpdateDialog(): void {
     this.dialog.open(UserUpdateFormComponent, {
       // Assigning the dialog a width
@@ -55,6 +64,10 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
+
+  /**
+   * getUser() - function to get user data
+   */
   getUser(): void {
     const user = localStorage.getItem('user');
     this.fetchApiData.getUser(user).subscribe((res: any) => {
@@ -63,6 +76,10 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
+
+  /**
+   * getMovies() - function to get movie data
+   */
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((res: any) => {
       this.movies = res;
@@ -79,6 +96,11 @@ export class UserProfileComponent implements OnInit {
     return this.favorites;
   }
 
+
+  /**
+   * deleteFavorite() - function to delete movie from list of favorites
+   * @param movieId 
+   */
   deleteFavorite(movieId: string): void {
     this.fetchApiData.removeFavorite(movieId).subscribe((resp: any) => {
       this.snackBar.open('Removed from list!', 'OK', {
@@ -93,6 +115,9 @@ export class UserProfileComponent implements OnInit {
   }
 
 
+  /**
+   * deleteUserAccount() - function to delete user account
+   */
   deleteUserAccount(): void {
     this.fetchApiData.deleteUser().subscribe((resp: any) => {
       // Logic for a successful user login goes here! (To be implemented)

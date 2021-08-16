@@ -1,6 +1,9 @@
 # myMovies-client_angular
 Client side for myMovies App built with Angular
 
+## Deployment
+[ myMovies - Angular version deployment here: berit-stange.github.io/deploy ](https://berit-stange.github.io/deploy)
+
 ![myMovies-client-angular](./src/img/my-movies-angular.gif)
 
 ### Objective:

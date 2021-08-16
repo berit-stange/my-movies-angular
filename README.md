@@ -1,5 +1,7 @@
 # myMovies-client_angular
- Client side for myMovies App built with Angular
+Client side for myMovies App built with Angular
+
+![myMovies-client-angular](./src/img/my-movies-angular.gif)
 
 ### Objective:
 - Build a web application that provides users with access to information about different movies, genres, directors. Users can register, update their information, deregister and create a list of "Favorites".
